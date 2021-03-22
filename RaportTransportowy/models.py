@@ -10,21 +10,24 @@ class Waluta(models.Model):
     SYMBOL_WALUTY=models.CharField(max_length=3)
     def __str__(self):
         return self.SYMBOL_WALUTY
+    class Meta:
+        verbose_name_plural = "Waluty"    
 
 
 class Fabryka(models.Model):
     NAZWA_FABRYKI=models.CharField(max_length=100)
     def __str__(self):
         return self.NAZWA_FABRYKI
-        class Meta:
-            verbose_name = "Fabryka"
-            verbose_name_plural = "Fabryki"
+    class Meta:
+        verbose_name_plural = "Fabryki"
 
 
 class Status (models.Model):
     NAZWA_STATUSU=models.CharField(max_length=100)
     def __str__(self):
         return self.NAZWA_STATUSU
+    class Meta:
+        verbose_name_plural = "Statusy"
 
 
 
@@ -32,6 +35,8 @@ class Handlowiec(models.Model):
     NAZWA_HANDLOWCA=models.CharField(max_length=100)
     def __str__ (self):
         return self.NAZWA_HANDLOWCA
+    class Meta:
+        verbose_name_plural = "Handlowcy"
 
 class Pobrane(models.Model):
     NAZWA_POBRANE=models.CharField(max_length=100)
@@ -42,6 +47,8 @@ class Spedycja(models.Model):
     NAZWA_SPEDYCJA=models.CharField(max_length=100)
     def __str__ (self):
         return self.NAZWA_SPEDYCJA
+    class Meta:
+        verbose_name_plural='Spedycje'
 
 class Transport(models.Model):
     PENDING=models.ForeignKey(Status,models.SET_NULL,blank=True,null=True)
@@ -73,3 +80,5 @@ class Transport(models.Model):
     DATA_DOSTARCZENIA_DOKUMENTU_TRANSPORTOWEGO=models.DateField(blank=True,null=True)
     NUMER_LISTU_PRZEWOZOWEGO=models.CharField(max_length=100,blank=True,null=True)
     POBRANE=models.ForeignKey(Pobrane,max_length=3, null=True,on_delete=models.SET_NULL,blank=True)
+    class Meta:
+        verbose_name_plural = "!Transporty!"
