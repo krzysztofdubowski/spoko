@@ -26,7 +26,8 @@ SECRET_KEY = '_f6neahy3gftc652&9u9rd+eto$-**apo=p^18x9h$3*+@%66h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.252','localhost']
+
+ALLOWED_HOSTS = ['192.168.1.252','localhost','SERWER-NETTO']
 
 
 
@@ -120,8 +121,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/staticfiles'
-STATIC_ROOT = '/staticfiles/'
-STATICFILES_DIRS=(
-    os.path.join(BASE_DIR,'staticfiles')
-)
+STATIC_URL = '/static/'
+#STATIC_ROOT = 'C:\dev\aplikacje_netto\src\netto\static'
+STATIC_ROOT = os.path.join(BASE_DIR, "static_env")
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    #'/var/www/static/',
+]

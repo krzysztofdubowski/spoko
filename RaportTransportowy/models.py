@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Product(models.Model):
@@ -50,13 +51,27 @@ class Spedycja(models.Model):
     class Meta:
         verbose_name_plural='Spedycje'
 
+class Zamawiajacy(models.Model):
+    NAZWA_ZAMAWIAJACEGO=models.CharField(max_length=100)
+    def __str__ (self):
+        return self.NAZWA_ZAMAWIAJACEGO
+    class Meta:
+        verbose_name_plural='Zamawiający'
+class Calopojazdowe(models.Model):
+    NAZWA_CALOPOJAZDOWE=models.CharField(max_length=100)
+    def __str__ (self):
+        return self.NAZWA_CALOPOJAZDOWE
+    class Meta:
+        verbose_name_plural='Całopojazdowe?'        
+
 class Transport(models.Model):
     PENDING=models.ForeignKey(Status,models.SET_NULL,blank=True,null=True)
-    
-    NUMER_ZAMOWIENIA=models.CharField(max_length=100,blank=True,null=True)
-    
-    ZAMAWIAJACY=models.CharField(max_length=100,blank=True,null=True)
-    CAŁOPOJAZDOWE=models.BooleanField(default=False)
+    #NUMER_ZAMOWIENIA=models.CharField(max_length=100,blank=True,null=True)
+    ZAMAWIAJACY=models.ForeignKey(Zamawiajacy,on_delete=models.SET_NULL, blank=True,null=True)
+    CALOPOJAZDOWE=models.ForeignKey(Calopojazdowe,on_delete=models.SET_NULL, blank=True,null=True)
+    #
+    # ZAMAWIAJACY=models.CharField(max_length=100,blank=True,null=True)
+    #CAŁOPOJAZDOWE=models.BooleanField(default=False)
     ILOSC_PALET=models.DecimalField(max_digits=10,decimal_places=0,null=True,blank=True)
     ILOSC_M2=models.DecimalField(max_digits=10,decimal_places=2 ,blank=True,null=True)
     FABRYKA=models.ForeignKey(Fabryka,on_delete=models.SET_NULL, blank=True,null=True)
@@ -73,12 +88,19 @@ class Transport(models.Model):
     PLANOWANA_DATA_ZALADUNKU=models.DateField(blank=True,null=True)
     DATA_ZALADUNKU=models.DateField(blank=True,null=True)
     DATA_ROZLADUNKU=models.DateField(blank=True,null=True)
-    ILOSC_FAKTUR=models.DecimalField(max_digits=2,decimal_places=0 ,blank=True,null=True)
     FS=models.CharField(max_length=100,blank=True,null=True)
     DATA_WYSTAWIENIA_FAKTURY=models.DateField(blank=True,null=True)
     DATA_WYSLANIA_SKANU_FAKTURY=models.DateField(blank=True,null=True)
-    DATA_DOSTARCZENIA_DOKUMENTU_TRANSPORTOWEGO=models.DateField(blank=True,null=True)
+    #DATA_DOSTARCZENIA_DOKUMENTU_TRANSPORTOWEGO=models.DateField(blank=True,null=True)
     NUMER_LISTU_PRZEWOZOWEGO=models.CharField(max_length=100,blank=True,null=True)
     POBRANE=models.ForeignKey(Pobrane,max_length=3, null=True,on_delete=models.SET_NULL,blank=True)
+    
+    @property
+    def spoko(self):
+        return(self.NUMER_ZAMOWIENIA)
+    @property
+    def NUMER(self):
+        return(str(self.id)+'/2021')
+
     class Meta:
         verbose_name_plural = "!Transporty!"
