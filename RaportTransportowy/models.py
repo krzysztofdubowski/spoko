@@ -66,12 +66,8 @@ class Calopojazdowe(models.Model):
 
 class Transport(models.Model):
     PENDING=models.ForeignKey(Status,models.SET_NULL,blank=True,null=True)
-    #NUMER_ZAMOWIENIA=models.CharField(max_length=100,blank=True,null=True)
     ZAMAWIAJACY=models.ForeignKey(Zamawiajacy,on_delete=models.SET_NULL, blank=True,null=True)
     CALOPOJAZDOWE=models.ForeignKey(Calopojazdowe,on_delete=models.SET_NULL, blank=True,null=True)
-    #
-    # ZAMAWIAJACY=models.CharField(max_length=100,blank=True,null=True)
-    #CAŁOPOJAZDOWE=models.BooleanField(default=False)
     ILOSC_PALET=models.DecimalField(max_digits=10,decimal_places=0,null=True,blank=True)
     ILOSC_M2=models.DecimalField(max_digits=10,decimal_places=2 ,blank=True,null=True)
     FABRYKA=models.ForeignKey(Fabryka,on_delete=models.SET_NULL, blank=True,null=True)
@@ -91,7 +87,6 @@ class Transport(models.Model):
     FS=models.CharField(max_length=100,blank=True,null=True)
     DATA_WYSTAWIENIA_FAKTURY=models.DateField(blank=True,null=True)
     DATA_WYSLANIA_SKANU_FAKTURY=models.DateField(blank=True,null=True)
-    #DATA_DOSTARCZENIA_DOKUMENTU_TRANSPORTOWEGO=models.DateField(blank=True,null=True)
     NUMER_LISTU_PRZEWOZOWEGO=models.CharField(max_length=100,blank=True,null=True)
     POBRANE=models.ForeignKey(Pobrane,max_length=3, null=True,on_delete=models.SET_NULL,blank=True)
     

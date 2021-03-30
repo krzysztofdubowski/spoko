@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 # Register your models here.
 
@@ -14,10 +15,13 @@ admin.site.index_title=""
     #list_filter=("SPEDYCJA")
 
 @admin.register(Transport)
-class TransportAdmin(admin.ModelAdmin):
+class TransportAdmin(ImportExportModelAdmin):
     list_display=('NUMER','PENDING','ZAMAWIAJACY','SPEDYCJA','FABRYKA','HANDLOWIEC','OPIS','ILOSC_PALET','CALOPOJAZDOWE')
-    list_filter=('PENDING','SPEDYCJA','HANDLOWIEC','FABRYKA')
+    list_filter=('PENDING','SPEDYCJA','HANDLOWIEC','FABRYKA','DATA_ZALADUNKU')
     #list_display=[field.name for field in Transport._meta.get_fields()]
+
+
+
 
 #admin.site.register(Transport)
 admin.site.register(Waluta)

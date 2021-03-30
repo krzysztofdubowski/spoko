@@ -29,12 +29,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.252','localhost','SERWER-NETTO']
 
-
+IMPORT_EXPORT_USE_TRANSACTIONS=True
 
 # Application definition
 
 INSTALLED_APPS = [
     'RaportTransportowy',
+    'import_export',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
