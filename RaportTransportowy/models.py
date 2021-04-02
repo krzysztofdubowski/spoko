@@ -65,7 +65,7 @@ class Calopojazdowe(models.Model):
         verbose_name_plural='Całopojazdowe?'        
 
 class Transport(models.Model):
-    PENDING=models.ForeignKey(Status,models.SET_NULL,blank=True,null=True)
+    STATUS=models.ForeignKey(Status,models.SET_NULL,blank=True,null=True)
     ZAMAWIAJACY=models.ForeignKey(Zamawiajacy,on_delete=models.SET_NULL, blank=True,null=True)
     CALOPOJAZDOWE=models.ForeignKey(Calopojazdowe,on_delete=models.SET_NULL, blank=True,null=True)
     ILOSC_PALET=models.DecimalField(max_digits=10,decimal_places=0,null=True,blank=True)
@@ -89,13 +89,13 @@ class Transport(models.Model):
     DATA_WYSLANIA_SKANU_FAKTURY=models.DateField(blank=True,null=True)
     NUMER_LISTU_PRZEWOZOWEGO=models.CharField(max_length=100,blank=True,null=True)
     POBRANE=models.ForeignKey(Pobrane,max_length=3, null=True,on_delete=models.SET_NULL,blank=True)
+    def __unicode__(self):
+        return (str(self.id)+'/2021')
+    
     
     @property
-    def spoko(self):
-        return(self.NUMER_ZAMOWIENIA)
-    @property
     def NUMER(self):
-        return(str(self.id)+'/2021')
+        return(str(self.id)+'/RT')
 
     class Meta:
         verbose_name_plural = "!Transporty!"

@@ -4,3 +4,5 @@ from RaportTransportowy.models import Transport
 class TransportResource(resources.ModelResource):
     class Meta:
         model=Transport
+        fields=('status')
+        
