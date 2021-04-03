@@ -36,6 +36,7 @@ IMPORT_EXPORT_USE_TRANSACTIONS=True
 INSTALLED_APPS = [
     'RaportTransportowy',
     'import_export',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
