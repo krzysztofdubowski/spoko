@@ -2,6 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from django.conf.locale.pl import formats as pl_formats
 from RaportTransportowy.resources import TransportResource
+
 # Register your models here.
 pl_formats.DATETIME_FORMAT="d M D"
 
