@@ -2,6 +2,7 @@ from import_export import resources,fields,widgets
 from RaportTransportowy.models import Transport,Status
 from import_export.admin import ImportExportModelAdmin
 from import_export.widgets import ForeignKeyWidget
+from import_export.widgets import DecimalWidget
 
 class TransportResource(resources.ModelResource):
     
@@ -32,12 +33,13 @@ class TransportResource(resources.ModelResource):
     IloscPalet=fields.Field(
         column_name='ILOSC_PALET',
         attribute='ILOSC_PALET',
-        
+        widget=DecimalWidget() 
     )
 
     IloscM2=fields.Field(
         column_name='ILOSC_M2',
         attribute='ILOSC_M2',
+        widget=DecimalWidget() 
         
     )
     
@@ -73,12 +75,14 @@ class TransportResource(resources.ModelResource):
     StawkaWyjsciowa=fields.Field(
         column_name='STAWKA_WYJSCIOWA',
         attribute='STAWKA_WYJSCIOWA',
+        widget=DecimalWidget() 
         
     )
 
     StawkaWynegocjowana=fields.Field(
         column_name='STAWKA_WYNEGOCJOWANA',
         attribute='STAWKA_WYNEGOCJOWANA',
+        widget=DecimalWidget() 
         
     )
     

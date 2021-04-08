@@ -43,6 +43,8 @@ class Pobrane(models.Model):
     NAZWA_POBRANE=models.CharField(max_length=100)
     def __str__ (self):
         return self.NAZWA_POBRANE
+    class Meta:
+        verbose_name_plural='Pobrane'    
 
 class Spedycja(models.Model):
     NAZWA_SPEDYCJA=models.CharField(max_length=100)

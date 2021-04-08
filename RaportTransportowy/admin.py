@@ -24,14 +24,17 @@ class TransportAdmin(ImportExportModelAdmin):
     list_display=('NUMER','STATUS','ZAMAWIAJACY','HANDLOWIEC','SPEDYCJA','CALOPOJAZDOWE','ILOSC_PALET','FABRYKA','OPIS','WALUTA','STAWKA_WYJSCIOWA','STAWKA_WYNEGOCJOWANA')
     list_filter=(
         ('STATUS',RelatedDropdownFilter),
-        ('SPEDYCJA',RelatedDropdownFilter),
+        
         ('HANDLOWIEC',RelatedDropdownFilter),
         ('FABRYKA',RelatedDropdownFilter),
         ('DATA_ZALADUNKU',DateRangeFilter),
         ('DATA_ROZLADUNKU',DateRangeFilter),
-        ('ZAMAWIAJACY',RelatedDropdownFilter)
+        ('ZAMAWIAJACY',RelatedDropdownFilter),
+        ('SPEDYCJA',RelatedDropdownFilter),
         )
+       
     resource_class=TransportResource
+    search_fields=('id','OPIS')
     
 
 
@@ -45,3 +48,4 @@ admin.site.register(Status)
 admin.site.register(Spedycja)
 admin.site.register(Zamawiajacy)
 admin.site.register(Calopojazdowe)
+admin.site.register(Pobrane)
