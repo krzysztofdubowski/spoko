@@ -7,7 +7,7 @@ from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDrop
 from django.utils.translation import ngettext
 from django.contrib.admin import DateFieldListFilter,SimpleListFilter
 from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
-from django_admin_multiple_choice_list_filter.list_filters import MultipleChoiceListFilter
+#from django_admin_multiple_choice_list_filter.list_filters import MultipleChoiceListFilter
 from import_export import widgets
 from django.utils.translation import gettext_lazy as _
 
@@ -88,6 +88,7 @@ class FiltrStatusow(SimpleListFilter):
 class TransportAdmin(ImportExportModelAdmin):
     list_display=('NUMER','OPIS','STATUS','NUMER_ZALADUNKOWY','NAZWA_KLIENTA','NAZWA_HANDLOWCA','ZAMAWIAJACY','HANDLOWIEC','SPEDYCJA','CALOPOJAZDOWE','ILOSC_PALET','ILOSC_M2','FABRYKA','OPIS','WALUTA','STAWKA_WYJSCIOWA','STAWKA_WYNEGOCJOWANA')
     list_filter=(
+        ('MIESIAC',DropdownFilter),
         ('STATUS',RelatedDropdownFilter),
         ('SPEDYCJA',RelatedDropdownFilter),
         ('HANDLOWIEC',RelatedDropdownFilter),

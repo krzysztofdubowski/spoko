@@ -66,6 +66,12 @@ class TransportResource(resources.ModelResource):
         
     )
 
+    MIESIAC=fields.Field(
+        column_name='MIESIAC',
+        attribute='MIESIAC',
+        
+    )
+
     Waluta=fields.Field(
         column_name='WALUTA',
         attribute='WALUTA',

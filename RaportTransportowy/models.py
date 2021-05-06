@@ -66,8 +66,22 @@ class Calopojazdowe(models.Model):
         verbose_name_plural='Całopojazdowe?'        
 
 class Transport(models.Model):
+    MIESIACE=(
+        ('1.styczen',('1.styczen')),
+        ('2.luty',('2.luty')),
+        ('3.marzec',('3.marzec')),
+        ('4.kwiecień',('4.kwiecień')),
+        ('5.maj',('5.maj')),
+        ('6.czerwiec',('6.czerwiec')),
+        ('7.lipiec',('7.lipiec')),
+        ('8.sierpień',('8.sierpirń')),
+        ('9.wrzesień',('9.wrzesień')),
+        ('10.październik',('10.październik')),
+        ('11.listopad',('11.listopad')),
+        ('12.grudzień',('12.grudzień')),
+    )
     STATUS=models.ForeignKey(Status,models.SET_NULL,blank=True,null=True)
-    
+    MIESIAC=models.CharField(max_length=20,choices=MIESIACE,blank=True,null=True)
     ZAMAWIAJACY=models.ForeignKey(Zamawiajacy,on_delete=models.SET_NULL, blank=True,null=True)
     CALOPOJAZDOWE=models.ForeignKey(Calopojazdowe,on_delete=models.SET_NULL, blank=True,null=True)
     ILOSC_PALET=models.DecimalField(max_digits=10,decimal_places=0,null=True,blank=True)
