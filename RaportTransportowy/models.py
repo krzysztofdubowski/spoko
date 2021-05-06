@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from import_export import widgets
 
 # Create your models here.
 class Product(models.Model):
@@ -43,8 +44,6 @@ class Pobrane(models.Model):
     NAZWA_POBRANE=models.CharField(max_length=100)
     def __str__ (self):
         return self.NAZWA_POBRANE
-    class Meta:
-        verbose_name_plural='Pobrane'    
 
 class Spedycja(models.Model):
     NAZWA_SPEDYCJA=models.CharField(max_length=100)
@@ -68,6 +67,7 @@ class Calopojazdowe(models.Model):
 
 class Transport(models.Model):
     STATUS=models.ForeignKey(Status,models.SET_NULL,blank=True,null=True)
+    
     ZAMAWIAJACY=models.ForeignKey(Zamawiajacy,on_delete=models.SET_NULL, blank=True,null=True)
     CALOPOJAZDOWE=models.ForeignKey(Calopojazdowe,on_delete=models.SET_NULL, blank=True,null=True)
     ILOSC_PALET=models.DecimalField(max_digits=10,decimal_places=0,null=True,blank=True)
@@ -91,13 +91,29 @@ class Transport(models.Model):
     DATA_WYSLANIA_SKANU_FAKTURY=models.DateField(blank=True,null=True)
     NUMER_LISTU_PRZEWOZOWEGO=models.CharField(max_length=100,blank=True,null=True)
     POBRANE=models.ForeignKey(Pobrane,max_length=3, null=True,on_delete=models.SET_NULL,blank=True)
+    
+    NUMER_ZALADUNKOWY=models.TextField(max_length=500,blank=True,null=True)
+    NAZWA_KLIENTA=models.TextField(max_length=500,blank=True,null=True)
+    NAZWA_HANDLOWCA=models.TextField(max_length=500,blank=True,null=True)
+    OPIS_POLACZONYCH=models.TextField(blank=True,null=True)
+    
+    
     def __unicode__(self):
         return (str(self.id)+'/2021')
-    
+    def daj_numer(self):
+       return str(self.id)+'/RT'
+
+
     
     @property
     def NUMER(self):
         return(str(self.id)+'/RT')
+    
+    @property
+    def STATUS_LACZENIA(self):
+        return(str(self.id)+'/RT')
 
     class Meta:
         verbose_name_plural = "!Transporty!"
+
+
