@@ -112,4 +112,5 @@ admin.site.register(Status)
 admin.site.register(Spedycja)
 admin.site.register(Zamawiajacy)
 admin.site.register(Calopojazdowe)
+admin.site.register(Pobrane)
 
