@@ -10,6 +10,9 @@ from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 #from django_admin_multiple_choice_list_filter.list_filters import MultipleChoiceListFilter
 from import_export import widgets
 from django.utils.translation import gettext_lazy as _
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from django.contrib import messages
 
 # Register your models here.
 pl_formats.DATETIME_FORMAT="d M D"
@@ -62,7 +65,24 @@ def Polacz(modeladmin, request,queryset):
         
         
         TransPolaczone.save()
-        
+
+def Kopiuj(modeladmin,request,queryset):
+    post_url=request.META['HTTP_REFERER']
+    ilosc=queryset.count()
+    old_ID=0
+    if ilosc==1:
+     for object in queryset:
+         old_ID=object.id
+         object.id = None
+         object.save()
+         id=object.id
+     url = reverse('admin:%s_%s_change' % (object._meta.app_label,  object._meta.model_name),  args=[object.id] )
+     messages.add_message(request, messages.INFO,'Jest to kopia zamówienia '+str(old_ID))
+     return HttpResponseRedirect(url)
+     
+    else:
+         messages.add_message(request, messages.INFO, 'Do kopiowania zaznacz tylko jedną pozycję!!')
+
 class FiltrStatusow(SimpleListFilter):
     title="FILTR STATUSÓW"
     parameter_name='Status_transportu'
@@ -102,7 +122,7 @@ class TransportAdmin(ImportExportModelAdmin):
     list_display_likns=('ZAMAWIAJACY',)
     search_fields=('id','OPIS','NUMER_ZALADUNKOWY','NAZWA_KLIENTA','NAZWA_HANDLOWCA')
     resource_class=TransportResource
-    actions = [Polacz]
+    actions = [Polacz,Kopiuj]
 
 
 admin.site.register(Waluta)
